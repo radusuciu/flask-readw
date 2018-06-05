@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  flask_readw:
+    build: .
+    environment:
+      DEBUG: 'true'
+      FLASK_DEBUG: 1
+      FLASK_ENV: 'development'
+      LC_ALL: 'C.UTF-8'
+      LANG: 'C.UTF-8'
+      FLASK_APP: 'flask_readw/__init__.py'
+    volumes:
+      - .:/app/flask_readw
+      - raw_vault:/raw_vault
+    tty: true
+    stdin_open: true
+    ports:
+      - 5000:5000
+volumes:
+  raw_vault:
+    external: true
