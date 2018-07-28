@@ -9,7 +9,7 @@ PROJECT_NAME = 'flask-readw'
 PROJECT_HOME_PATH = pathlib.Path(os.path.realpath(__file__)).parents[1]
 READW_SCRIPT_PATH = PROJECT_HOME_PATH.joinpath('run.sh')
 
-RAW_VAULT = '/raw_vault/'
+RAW_VAULT_PATH = pathlib.Path('/raw_vault/')
 
 NUM_RETRIES = 2
 

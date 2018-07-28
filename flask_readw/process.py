@@ -1,9 +1,7 @@
 from enum import Enum
 from subprocess import PIPE
-from os.path import join, splitext, basename
 import config.config as config
 import psutil
-import glob
 
 
 class ConversionStatus(Enum):
@@ -14,7 +12,7 @@ class ConversionStatus(Enum):
 
 class ConversionProcess:
     def __init__(self, filename):
-        self.filename = filename
+        self.filename = str(filename)
         self.status = None
         self.run_count = 0
 
@@ -101,7 +99,8 @@ class NoRawFilesException(Exception):
 
 
 def convert_folder(path):
-    raw_files = list(glob.iglob(join(config.RAW_VAULT, path, '*.RAW')))
+    search_path = config.RAW_VAULT_PATH.joinpath(path)
+    raw_files = list(search_path.glob('*.raw')) + list(search_path.glob('*.RAW'))
 
     # make sure the given path contains raw files
     if not len(raw_files): raise NoRawFilesException
