@@ -21,8 +21,12 @@ if [ ! -f requirements.txt ]; then
     pip freeze > requirements.txt
 fi
 
-# run the dev server
-# trying to install requirements if we get any error
-flask run -h 0.0.0.0 || pip install -r requirements.txt && flask run -h 0.0.0.0
+if [[ -n $DEBUG && $DEBUG == true ]]; then
+    # trying to install requirements if we get any error
+    flask run -h 0.0.0.0 || pip install -r requirements.txt && flask run -h 0.0.0.0
+else
+    pip install -r requirements.txt
+    gunicorn --config=config/gunicorn.py flask_readw:app
+fi
 
 exec
