@@ -1,16 +1,9 @@
 #!/bin/bash
 
-# export DEBUG='true'
-# export FLASK_DEBUG=1
-# export LANG='C.UTF-8'
-# export LC_ALL='C.UTF-8'
-# export FLASK_APP='flask_readw/__init__.py'
-
-# this is pretty specific to my system running Linux Subsystem for Windows with conda
 if [ ! -d venv ]; then
-    python3 -m venv --without-pip venv
+    python3 -m venv venv
     source venv/bin/activate
-    curl https://bootstrap.pypa.io/get-pip.py | python
+    pip install -U pip setuptools
     deactivate
 fi
 
